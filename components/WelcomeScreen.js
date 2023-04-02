@@ -9,7 +9,8 @@ export default function WelcomeScreen({ navigation }) {
   return (
     <ScrollView style={[
       styles.container, 
-      colorScheme === 'light' ? { backgroundColor: '#ffffff' } : { backgroundColor: "#333333"} ]}>
+      colorScheme === 'light' ? { backgroundColor: '#ffffff' } : { backgroundColor: "#333333"} 
+    ]}>
 
       <View style={styles.headerWrapper}>
         <Image
@@ -20,9 +21,15 @@ export default function WelcomeScreen({ navigation }) {
           accessibilityLabel={'Little Lemon Logo'}
         />
 
-        <Text style={styles.headerText}>Little Lemon</Text>
+        <Text style={[
+          styles.headerText, 
+          colorScheme === 'light' ? {color: 'black'} : {color: '#EDEFEE'}
+        ]}>Little Lemon</Text>
       </View>
-      <Text style={styles.regularText}>
+      <Text style={[
+        styles.regularText, 
+        colorScheme === 'light' ? {color: 'black'} : {color: '#EDEFEE'}
+      ]}>
         Little Lemon is a charming neighborhood bistro that serves simple food
         and classic cocktails in a lively but casual environment. We would love
         to hear your experience with us!
@@ -31,6 +38,9 @@ export default function WelcomeScreen({ navigation }) {
         onPress={() => navigation.navigate('Menu')}
         style={styles.button}>
         <Text style={styles.buttonText}>View Menu</Text>
+      </Pressable>
+      <Pressable style={styles.button} onPress={() => navigation.goBack()}> 
+        <Text style={styles.buttonText}> Logout </Text>
       </Pressable>
     </ScrollView>
   );
@@ -52,7 +62,7 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     paddingBottom: 10,
     fontSize: 30,
-    color: '#EDEFEE',
+    // color: '#EDEFEE',
     textAlign: 'center',
   },
   regularText: {

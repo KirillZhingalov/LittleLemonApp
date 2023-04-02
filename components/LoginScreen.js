@@ -1,12 +1,15 @@
 import * as React from 'react';
+import { useColorScheme } from 'react-native';
 import { ScrollView, Text, TextInput, StyleSheet, KeyboardAvoidingView, Pressable} from 'react-native';
 
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }) {
 
   const [email, onEmailChange] = React.useState('');
   const [password, onPasswordChange] = React.useState('');
 
   const [isLoggedIn, onLoginPress] = React.useState(false);
+
+  const colorScheme = useColorScheme();
 
   return (
 
@@ -16,19 +19,17 @@ export default function LoginScreen() {
               style={styles.container}
       >
         <ScrollView style={styles.container}>
-          <Text style={styles.headerText}>Welcome to Little Lemon</Text>
+          <Text style={[
+            styles.headerText, 
+            colorScheme === 'light' ? {color: 'black'} : {color: '#EDEFEE'}
+          ]}>Welcome to Little Lemon</Text>
           
-          {isLoggedIn && ( 
-            <>
-            <Text style={styles.regularText}> You are logged in </Text>
-            <Pressable style={styles.button} onPress={() => onLoginPress(!isLoggedIn)}>
-              <Text style={styles.buttonText}> Logout </Text>
-            </Pressable>
-            </>
-          )}
           {!isLoggedIn && ( 
             <>
-              <Text style={styles.regularText}> Login to continue </Text>
+              <Text style={[
+                styles.regularText, 
+                colorScheme === 'light' ? { color: 'black' } : { color: '#EDEFEE' }
+              ]}> Login to continue </Text>
               <TextInput 
                 style={styles.inputBox} 
                 placeholder="email" 
@@ -43,7 +44,10 @@ export default function LoginScreen() {
                 secureTextEntry={true} 
               />
             
-              <Pressable style={styles.button} onPress={() => onLoginPress(!isLoggedIn)}>
+              {/* <Pressable style={styles.button} onPress={() => onLoginPress(!isLoggedIn)}>
+                <Text style={styles.buttonText}>Login</Text>
+              </Pressable> */}
+              <Pressable style={styles.button} onPress={() => navigation.navigate('Welcome')}>
                 <Text style={styles.buttonText}>Login</Text>
               </Pressable>
             </>
