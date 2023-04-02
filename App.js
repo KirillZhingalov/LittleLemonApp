@@ -2,6 +2,7 @@ import * as React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import LittleLemonHeader from './components/LittleLemonHeader';
 import LittleLemonFooter from './components/LittleLemonFooter';
@@ -13,49 +14,29 @@ import LoginScreen from './components/LoginScreen';
 import WelcomeScreen from './components/WelcomeScreen';
 
 
-// Instantiate the Stack Navigator
-const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
 
 export default function App() {
-
-  function LogoTitle() {
-    return (
-      <Image 
-        source={require('./img/LittleLemonLogo.jpg')} 
-        style={styles.image} 
-      />
-    );
-  }
-
 
   return (
   
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName='Login' // Setting up initial screen
+      <Drawer.Navigator
+        // useLegacyImplementation
+        // screenOptions={{ drawerPosition: "right" }}
+        initialRouteName='Welcome' // Setting up initial screen
       >
 
-        <Stack.Screen 
-          options={{ 
-            title: "Home", 
-            headerTitle: (props) => <LogoTitle {...props} />
-          }}                          // Setting up title of the screen
+        <Drawer.Screen 
           name="Welcome"              // Setting up name of the screen
           component={WelcomeScreen}   // Setting up component to be rendered
         />
-        <Stack.Screen 
-          options={{
-            title: "Login",
-          }}                          // Setting up title of the screen
-          name="Login"                // Setting up name of the screen
-          component={LoginScreen}     // Setting up component to be rendered
-        /> 
-        <Stack.Screen
+        <Drawer.Screen
           name="Menu"
           component={MenuItemsSectionList}
         />
 
-      </Stack.Navigator>
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 }
