@@ -2,6 +2,8 @@ import * as React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons } from '@expo/vector-icons';
 
 import LittleLemonHeader from './components/LittleLemonHeader';
 import LittleLemonFooter from './components/LittleLemonFooter';
@@ -14,48 +16,45 @@ import WelcomeScreen from './components/WelcomeScreen';
 
 
 // Instantiate the Stack Navigator
-const Stack = createNativeStackNavigator();
+// const Stack = createNativeStackNavigator();
+
+// Instantiate Tab Navigator 
+const Tab = createBottomTabNavigator();
 
 export default function App() {
-
-  function LogoTitle() {
-    return (
-      <Image 
-        source={require('./img/LittleLemonLogo.jpg')} 
-        style={styles.image} 
-      />
-    );
-  }
-
 
   return (
   
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName='Login' // Setting up initial screen
-      >
-
-        <Stack.Screen 
-          options={{ 
-            title: "Home", 
-            headerTitle: (props) => <LogoTitle {...props} />
-          }}                          // Setting up title of the screen
+      <Tab.Navigator
+        initialRouteName='Welcome' // Setting up initial screen
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+  
+            if (route.name === 'Welcome') {
+              iconName = focused
+                ? 'ios-information-circle'
+                : 'ios-information-circle-outline';
+            } else if (route.name === 'Menu') {
+              iconName =  'ios-list';
+            }
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+          tabBarActiveTintColor: 'tomato',
+          tabBarInactiveTintColor: 'gray',
+        })}>
+        
+        <Tab.Screen 
           name="Welcome"              // Setting up name of the screen
           component={WelcomeScreen}   // Setting up component to be rendered
         />
-        <Stack.Screen 
-          options={{
-            title: "Login",
-          }}                          // Setting up title of the screen
-          name="Login"                // Setting up name of the screen
-          component={LoginScreen}     // Setting up component to be rendered
-        /> 
-        <Stack.Screen
+        <Tab.Screen
           name="Menu"
           component={MenuItemsSectionList}
         />
 
-      </Stack.Navigator>
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
