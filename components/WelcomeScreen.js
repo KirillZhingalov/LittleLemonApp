@@ -34,13 +34,22 @@ export default function WelcomeScreen({ navigation }) {
         and classic cocktails in a lively but casual environment. We would love
         to hear your experience with us!
       </Text>
+
+      {/* Button to move into Menu */}
       <Pressable
         onPress={() => navigation.navigate('Menu')}
         style={styles.button}>
         <Text style={styles.buttonText}>View Menu</Text>
       </Pressable>
+
+      {/* Logout button */}
       <Pressable style={styles.button} onPress={() => navigation.goBack()}> 
-        <Text style={styles.buttonText}> Logout </Text>
+        <Text style={styles.buttonText}>Logout</Text>
+      </Pressable>
+
+      {/* Settings button */}
+      <Pressable style={styles.button} onPress={() => navigation.navigate('Settings')}>
+        <Text style={styles.buttonText}>Settings</Text>
       </Pressable>
     </ScrollView>
   );

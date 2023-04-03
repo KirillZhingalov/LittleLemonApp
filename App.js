@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, Settings } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -11,10 +11,12 @@ import MenuItemsSectionList from './components/MenuItemsSectionList';
 // import FeedbackForm from './components/FeedbackFormInputTextComponent';
 import LoginScreen from './components/LoginScreen';
 import WelcomeScreen from './components/WelcomeScreen';
+import SettingsScreen from './components/Settings';
 
 
 // Instantiate the Stack Navigator
 const Stack = createNativeStackNavigator();
+
 
 export default function App() {
 
@@ -53,6 +55,10 @@ export default function App() {
         <Stack.Screen
           name="Menu"
           component={MenuItemsSectionList}
+        />
+        <Stack.Screen
+          name="Settings"
+          component={SettingsScreen}
         />
 
       </Stack.Navigator>
