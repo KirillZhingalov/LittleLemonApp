@@ -11,6 +11,7 @@ import MenuItemsSectionList from './components/MenuItemsSectionList';
 // import FeedbackForm from './components/FeedbackFormInputTextComponent';
 import LoginScreen from './components/LoginScreen';
 import WelcomeScreen from './components/WelcomeScreen';
+import MenuItemsFlatList from './components/MenuItemsFlatList';
 
 
 // Instantiate the Stack Navigator
@@ -52,7 +53,7 @@ export default function App() {
         /> 
         <Stack.Screen
           name="Menu"
-          component={MenuItemsSectionList}
+          component={MenuItemsFlatList}
         />
 
       </Stack.Navigator>
